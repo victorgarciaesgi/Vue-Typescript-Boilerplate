@@ -1,21 +1,20 @@
-# Packdiff Front
+# Vuex boilerplate
 
 <p align="center">
 <img width="100" src="https://vuejs.org/images/logo.png" alt="Vue logo">
-<img width="100" src="https://upload.wikimedia.org/wikipedia/fr/3/3b/Logo_Carrefour.svg" alt="Carrefour logo">
 
 </p>
 
 # Installation
 
 ```bash
-npm install
+yarn
 ```
 
 or
 
 ```bash
-yarn
+npm install
 ```
 
 # Change API url endpoint
@@ -32,7 +31,7 @@ Webpack config in `./config`
 # Developpment
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 A page will open on [localhost:5000](http://localhost:5000).
@@ -42,7 +41,7 @@ Build ~ 60s
 Live reload, Hot Module Replacement and Vue devtools
 
 ```bash
-npm run dev2
+yarn dev2
 ```
 
 Same as dev but with **Webpack-Dashboard**
@@ -73,7 +72,7 @@ Same as dev but with **Webpack-Dashboard**
 # Production
 
 ```bash
-npm run prod
+yarn prod
 ```
 
 - pm2
@@ -85,13 +84,13 @@ npm run prod
 - drop console logs and comments
 
 ```bash
-npm run prod2
+yarn prod2
 ```
 
 Same as prod but with **Nodemon**
 
 ```bash
-npm run build:prod
+yarn build:prod
 ```
 
 Regenerate the assets
