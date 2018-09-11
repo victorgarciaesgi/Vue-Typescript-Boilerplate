@@ -1,0 +1,64 @@
+@import './colors';
+@import './fonts';
+@import './variables';
+@import './mixins';
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica', sans-serif;
+  color: $g90;
+  box-sizing: border-box;
+  background-color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-flow: column wrap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: inherit;
+  flex-flow: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+  align-content: inherit;
+}
+
+ul,
+li {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  list-style-type: none;
+}
+
+.flex {
+  display: flex;
+  position: relative;
+}
+
+button {
+  display: flex;
+  outline: none;
+  border: none;
+  background: none;
+  resize: none;
+  font-family: 'Open Sans', sans-serif;
+}
