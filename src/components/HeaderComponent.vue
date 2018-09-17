@@ -9,9 +9,21 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { NotificationsModule } from '@store';
 
 @Component({})
-export default class HeaderComponent extends Vue {}
+export default class HeaderComponent extends Vue {
+  mounted() {
+    NotificationsModule.actions.addNotification({
+      type: 'success',
+      message: 'App working!',
+    });
+    NotificationsModule.actions.addNotification({
+      type: 'success',
+      message: 'App working!',
+    });
+  }
+}
 </script>
 
 
@@ -21,7 +33,6 @@ div.header-container {
   position: absolute;
   height: 100%;
   width: 100vw;
-  top: 0;
   left: 0;
 
   header {
@@ -36,6 +47,7 @@ div.header-container {
     z-index: 9000;
     flex-flow: row nowrap;
     box-shadow: 0 0 10px $ombre;
+    color: blue;
 
     nav {
       width: 100%;

@@ -1,7 +1,6 @@
 const helpers = require('./helpers');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const cssNext = require('postcss-cssnext');
+const { VueLoaderPlugin } = require('vue-loader');
+
 const baseConfig = {
   entry: {
     bundle: helpers.root('/src/main.ts'),
@@ -12,7 +11,7 @@ const baseConfig = {
     path: helpers.root('dist'),
   },
   resolve: {
-    extensions: ['.ts', '.js', '.vue'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue'],
     alias: {
       '@components': helpers.root('src/components/index.ts'),
       '@views': helpers.root('src/views'),
@@ -41,44 +40,22 @@ const baseConfig = {
         test: /\.vue$/,
         use: {
           loader: 'vue-loader',
-          options: {
-            postcss: {
-              plugins: [cssNext()],
-              options: {
-                sourceMap: true,
-              },
-            },
-            cssSourceMap: true,
-            loaders: {
-              scss: [
-                'vue-style-loader',
-                'css-loader',
-                'sass-loader',
-                {
-                  loader: 'sass-resources-loader',
-                  options: {
-                    resources: helpers.root('src/styles/root.scss'),
-                    esModule: true,
-                  },
-                },
-              ],
-              ts: 'ts-loader',
-            },
-          },
         },
       },
       {
         test: /\.ts$/,
-        exclude: /node_modules/,
-        loader: 'ts-loader',
-        options: {
-          appendTsSuffixTo: [/\.vue$/],
-        },
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/],
+            },
+          },
+        ],
       },
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
+        test: /\.jsx?$/,
+        use: ['babel-loader'],
       },
       {
         test: /\.(jpe?g|png|svg|ttf|eot|woff(2)?)(\?[a-z0-9=&.]+)?$/,
@@ -91,31 +68,7 @@ const baseConfig = {
       },
     ],
   },
-  plugins: [
-    new FaviconsWebpackPlugin({
-      logo: helpers.root('src/assets/images/logo.png'),
-      persistentCache: true,
-      inject: true,
-      background: '#fff',
-      icons: {
-        android: false,
-        appleIcon: false,
-        appleStartup: false,
-        coast: false,
-        favicons: true,
-        firefox: false,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false,
-      },
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: helpers.root('src/assets'),
-      },
-    ]),
-  ],
+  plugins: [new VueLoaderPlugin()],
 };
 
 module.exports = baseConfig;

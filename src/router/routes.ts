@@ -1,22 +1,24 @@
-import { MyMeta, MyRoute, MyRouteConfig, MyRouteRecord } from './routes.models';
+import { MyMeta, MyRoute, MyRouteConfig, MyRouteRecord } from "./routes.models";
+import Home from "@views/Home.vue";
+import error404 from "@views/error404.vue";
 
 // Liste d'identifiants des routes
 export const routesNames = {
-  HOME: 'home',
+  HOME: "home",
 };
 
 // Liste des routes
 export const routesList: MyRouteConfig[] = [
   {
-    path: '/',
+    path: "/",
     name: routesNames.HOME,
-    component: () => import('@views/Home.vue'),
+    component: Home,
   },
   {
-    path: '/*',
+    path: "/*",
     meta: {
-      title: 'Page non trouvée',
+      title: "Page non trouvée",
     },
-    component: () => import('@views/error404.vue'),
+    component: error404,
   },
 ];

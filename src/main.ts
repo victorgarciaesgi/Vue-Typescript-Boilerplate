@@ -1,15 +1,15 @@
-import './shims/polyfills/function.name.polyfill';
-import 'es6-shim';
-import Vue from 'vue';
-import Vuelidate from 'vuelidate';
-import Vue2Filters from 'vue2-filters';
-import { Store } from 'vuex';
-import App from './App.vue';
-import MyFilters from '@utils';
-import { sync } from 'vuex-router-sync';
-import { Router } from '@router';
-import './styles/root.scss';
-import { storeBuilder, DebugMode } from '@store';
+import { Router } from "@router";
+import { DebugMode, storeBuilder } from "@store";
+import MyFilters from "@utils";
+import "es6-shim";
+import Vue from "vue";
+import Vue2Filters from "vue2-filters";
+import Vuelidate from "vuelidate";
+import { Store } from "vuex";
+import { sync } from "vuex-router-sync";
+import App from "./App.vue";
+import "./shims/polyfills/function.name.polyfill";
+import "./styles/root.scss";
 
 // Plugins declaration
 Vue.use(Vuelidate);
@@ -22,7 +22,7 @@ const store: Store<any> = storeBuilder.vuexStore({
 });
 
 // Sync VueRouter and VuexStore
-sync(store, Router, { moduleName: 'RouterModule' });
+sync(store, Router, { moduleName: "RouterModule" });
 
 Vue.config.keyCodes = {
   left: 37,
@@ -34,6 +34,6 @@ Vue.config.keyCodes = {
 
 new Vue({
   router: Router,
-  store: store,
+  store,
   render: h => h(App),
-}).$mount('#app');
+}).$mount("#app");

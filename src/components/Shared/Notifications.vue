@@ -81,12 +81,6 @@ ul#notifications-container {
     background-color: white;
     line-height: 17px;
 
-    @at-root {
-      a#{&} {
-        cursor: pointer;
-      }
-    }
-
     div {
       display: flex;
       align-content: center;

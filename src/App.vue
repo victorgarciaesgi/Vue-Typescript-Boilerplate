@@ -11,13 +11,9 @@
 
 
 <script lang="ts">
-import Vue from 'vue';
-import { Store } from 'vuex';
-import { Component } from 'vue-property-decorator';
-
-import { EventBus } from '@services';
-import { Notifications, HeaderComponent } from '@components';
-import { NotificationsModule } from '@store';
+import { Vue, Component } from "vue-property-decorator";
+import { EventBus } from "@services";
+import { Notifications, HeaderComponent } from "@components";
 
 @Component({
   components: {
@@ -29,26 +25,14 @@ export default class App extends Vue {
   // Class created
   created() {
     // close popups when resizing window
-    window.addEventListener('resize', () => {
-      EventBus.$emit('closePopups');
-    });
-  }
-
-  // Dom mount finished
-  mounted() {
-    NotificationsModule.actions.addNotification({
-      type: 'success',
-      message: 'App working!',
-    });
-    NotificationsModule.actions.addNotification({
-      type: 'success',
-      message: 'App working!',
+    window.addEventListener("resize", () => {
+      EventBus.$emit("closePopups");
     });
   }
 
   closePopups() {
     // A click outside any popup close all popups
-    EventBus.$emit('closePopups');
+    EventBus.$emit("closePopups");
   }
 }
 </script>

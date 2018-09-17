@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 export function timeout(duration: number): Promise<{}> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -12,59 +10,58 @@ export function randomNumber(min: number, max: number): number {
   return Math.floor(Math.random() * max + min);
 }
 
+// Popup component helper
 export function calculatePopupPosition(origin: HTMLElement, target: HTMLElement) {
-  let $origin = $(origin);
-  let $target = $(target);
-
-  let originWidth: number = $origin.outerWidth();
-  let originHeight: number = $origin.outerHeight();
-  let viewportOffset = origin.getBoundingClientRect();
-  let position = {
+  const originWidth: number = origin.offsetWidth;
+  const originHeight: number = origin.offsetHeight;
+  const viewportOffset = origin.getBoundingClientRect();
+  const position = {
     left: Math.round(viewportOffset.left),
     top: Math.round(viewportOffset.top),
   };
 
-  let popupWidth: number = $target.width();
+  const popupWidth: number = target.clientWidth;
   let outputLeft: number | string = position.left + originWidth / 2 - popupWidth / 2;
   let outputTop: number | string = position.top + originHeight;
-  let outputBottom: number | string = 'auto';
-  let windowWidth: number = $(window).width();
+  let outputBottom: number | string = "auto";
+  const windowWidth: number = window.innerWidth;
 
   if (outputLeft + popupWidth > windowWidth - 15) {
-    outputLeft = windowWidth - popupWidth - 15 + 'px';
+    outputLeft = windowWidth - popupWidth - 15 + "px";
   } else if (outputLeft < 15) {
-    outputLeft = 15 + 'px';
+    outputLeft = 15 + "px";
   }
   if (outputTop + 300 > $(window).height()) {
-    outputTop = 'auto';
-    outputBottom = $(window).height() - position.top + 'px';
+    outputTop = "auto";
+    outputBottom = $(window).height() - position.top + "px";
   } else {
-    outputTop = outputTop + 'px';
+    outputTop = outputTop + "px";
   }
 
   return {
     left: outputLeft,
     top: outputTop,
     bottom: outputBottom,
-    width: originWidth + 'px',
+    width: originWidth + "px",
   };
 }
 
-export function calculatePopupRelativePosition(origin: HTMLElement, target: HTMLElement, container?: HTMLElement) {
-  const $origin = $(origin);
-  const $target = $(target);
-  const $container = $(container);
-
-  const originWidth: number = $origin.outerWidth();
-  const originHeight: number = $origin.outerHeight();
+// Popup component helper
+export function calculatePopupRelativePosition(
+  origin: HTMLElement,
+  target: HTMLElement,
+  container?: HTMLElement
+) {
+  const originWidth: number = origin.offsetWidth;
+  const originHeight: number = origin.offsetHeight;
   const viewportOffset = origin.getBoundingClientRect();
   let OriginPosition = {
     left: Math.round(viewportOffset.left),
     top: Math.round(viewportOffset.top),
   };
 
-  const popupWidth: number = $target.outerWidth();
-  const popupHeight: number = $target.outerHeight();
+  const popupWidth: number = target.offsetWidth;
+  const popupHeight: number = target.offsetHeight;
 
   let containerWidth: number;
   let containerHeight: number;
@@ -74,8 +71,8 @@ export function calculatePopupRelativePosition(origin: HTMLElement, target: HTML
   let outputTop: any;
 
   if (container) {
-    containerWidth = $container.outerWidth();
-    containerHeight = $container.outerHeight();
+    containerWidth = container.offsetWidth;
+    containerHeight = container.offsetHeight;
     containerPosition = {
       left: Math.round(container.getBoundingClientRect().left),
       top: Math.round(container.getBoundingClientRect().top),
@@ -85,8 +82,8 @@ export function calculatePopupRelativePosition(origin: HTMLElement, target: HTML
       top: OriginPosition.top - containerHeight,
     };
   } else {
-    containerWidth = $(window).width();
-    containerHeight = $(window).height();
+    containerWidth = window.innerWidth;
+    containerHeight = window.innerHeight;
   }
 
   outputLeft = OriginPosition.left + originWidth / 2 - popupWidth / 2;
@@ -96,17 +93,17 @@ export function calculatePopupRelativePosition(origin: HTMLElement, target: HTML
   let YType;
 
   if (outputLeft + popupWidth > containerWidth - 15) {
-    XType = 'right';
+    XType = "right";
   } else if (outputLeft < 15) {
-    XType = 'left';
+    XType = "left";
   } else {
-    XType = 'center';
+    XType = "center";
   }
 
   if (outputTop + popupHeight + 15 > containerHeight) {
-    YType = 'top';
+    YType = "top";
   } else {
-    YType = 'bottom';
+    YType = "bottom";
   }
 
   return {

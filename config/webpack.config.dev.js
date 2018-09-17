@@ -5,45 +5,19 @@ const path = require('path');
 const helpers = require('./helpers');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const cssNext = require('postcss-cssnext');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const webpackDashboard = require('webpack-dashboard/plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const autoprefixer = require('autoprefixer');
+const cssRules = require('./css.rules.config');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webpackDevConfig = {
+  mode: 'development',
   module: {
     rules: [
       {
         test: /\.s?css$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              minimize: false,
-              sourceMap: true,
-              importLoaders: 2,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [cssNext()],
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              outputStyle: 'expanded',
-              sourceMap: true,
-              sourceMapContents: true,
-            },
-          },
-        ],
+        use: cssRules.devConfig,
       },
     ],
   },
@@ -60,6 +34,10 @@ const webpackDevConfig = {
     new FriendlyErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -89,7 +67,6 @@ const webpackDevConfig = {
       publicPath: false,
     },
   },
-  devtool: 'cheap-module-eval-source-map',
 };
 
 const devExport = merge(webpackBaseConfig, webpackDevConfig);

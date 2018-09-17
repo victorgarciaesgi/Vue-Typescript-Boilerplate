@@ -5,10 +5,15 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "removeComments": true,
     "noImplicitAny": false,
     "noUnusedLocals": false,
     "pretty": true,
+    "sourceMap": true,
+    "jsx": "preserve",
+    "allowJs": true,
+    "skipLibCheck": true,
     "noImplicitThis": true,
     "lib": ["dom", "es5", "es2015", "es2015.promise", "es2017", "es2017.object", "es7"],
     "baseUrl": "./src",
@@ -32,10 +37,7 @@
       "@methods": ["./utils/methods.ts"],
       "@filters": ["./utils/filters.ts"],
       "@models": ["./models/index.ts"]
-    },
-    "sourceMap": true,
-    "allowJs": true,
-    "skipLibCheck": true
+    }
   },
   "exclude": ["typings/browser.d.ts", "typings/browser", "node_modules", "dist"],
   "compileOnSave": true
